@@ -1,0 +1,211 @@
+/* CSS RESET */
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: min(1vw, 1vh);
+}
+
+li,
+ul {
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+  list-style-type: 0;
+}
+
+/* GLOBAL STYLES */
+body {
+  background: #eee7de;
+  font-family: 'PT Sans', sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Header and game data */
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header h1 {
+  font-size: 30px;
+}
+
+.header__img {
+  height: 30px;
+  width: 30px;
+  margin: 0 16px;
+}
+
+.game-data {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 20px;
+  width: 80rem;
+}
+
+/* deck & cards */
+.deck {
+  width: 82rem;
+  height: 82rem;
+  background: #575551;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 2rem 2rem 6rem 0 rgba(46, 61, 73, 0.5);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 0 3em;
+}
+
+.card {
+  height: 18rem;
+  width: 18rem;
+  padding: 1rem 1rem;
+  margin: 1rem 1rem;
+  background: url('../img/card-back.svg') center;
+  font-size: 0;
+  color: #ffffff;
+  border-radius: 2rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2rem 1rem 10rem 0 rgba(46, 61, 73, 0.5);
+}
+
+.card img {
+  width: 16rem;
+  height: 4rem;
+  object-fit: contain;
+  visibility: hidden;
+}
+
+.card.open {
+  transform: rotateY(0);
+  cursor: default;
+  animation: flip-diagonal-2-br 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+    reverse both;
+  backface-visibility: visible !important;
+}
+
+.card.show img {
+  visibility: visible !important;
+  opacity: 100 !important;
+}
+
+.card.disabled {
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.card.matched {
+  animation: blink-1 0.6s both;
+}
+
+.card.unmatched {
+  animation: shake-horizontal 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+}
+
+/* Individual card backgrounds */
+.open.e24 {
+  background: #eee7de;
+}
+.open.vg {
+  background: #eb2127;
+}
+.open.finn {
+  background: #0263fb;
+}
+.open.prisjakt {
+  background: #06adda;
+}
+.open.helthjem {
+  background: #f2b133;
+}
+.open.lendo {
+  background: #2bc568;
+}
+.open.aftenposten {
+  background: #ffffff;
+}
+.open.schibsted {
+  background: #30588e;
+}
+.open.finn {
+  background: #0263fb;
+}
+.open.finn {
+  background: #0263fb;
+}
+
+/* animations */
+@keyframes flip-diagonal-2-br {
+  0% {
+    transform: rotate3d(-1, 1, 0, 0deg);
+    opacity: 100;
+  }
+  100% {
+    transform: rotate3d(-1, 1, 0, 180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes blink-1 {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0;
+  }
+}
+
+@keyframes shake-horizontal {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    transform: translateX(-5px);
+  }
+  20%,
+  40%,
+  60% {
+    transform: translateX(5px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+  90% {
+    transform: translateX(-4px);
+  }
+}
