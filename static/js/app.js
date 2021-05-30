@@ -6,5 +6,5 @@
 import Game from './Game.js';
 
 window.onload = function () {
-  window.game = new Game();
+  const game = new Game();
 };
