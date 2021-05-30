@@ -150,9 +150,9 @@ body {
   display: block;
 }
 
-.win iframe {
-  width: 80rem;
-  height: 80rem;
+.win img {
+  width: 60rem;
+  height: 60rem;
 }
 
 /* Individual card backgrounds */
