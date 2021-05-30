@@ -75,6 +75,7 @@ body {
   width: 30px;
   margin-left: 10px;
   cursor: pointer;
+  z-index: 10;
 }
 
 /* deck & cards */
@@ -143,7 +144,10 @@ body {
 
 /* win */
 .win {
-  position: fixed;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: none;
 }
 .win.show {
@@ -151,8 +155,8 @@ body {
 }
 
 .win img {
-  width: 60rem;
-  height: 60rem;
+  width: 70rem;
+  height: 70rem;
 }
 
 /* Individual card backgrounds */

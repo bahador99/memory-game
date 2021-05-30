@@ -73,6 +73,7 @@ export default class Game {
   resetGame = () => {
     // end previous game
     this.endGame();
+    this.winEl.classList.remove('show');
     // start new game
     this.startGame();
     this.resetSound.play();
