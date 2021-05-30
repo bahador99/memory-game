@@ -2,6 +2,10 @@
 
 Memory game is a basic card matching game where the player is required to match pairs of cards until all the cards are correctly matched.
 
+## Setting up dev env
+
+`npm install` for installing the express package (it is used in the server.js file to create a simple node server). Then `npm start`.
+
 ## Decisions and assumptions
 
 - Finne morsomme bilder til kortene. Statiske eller dynamiske?
