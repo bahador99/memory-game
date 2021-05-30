@@ -141,6 +141,20 @@ body {
   animation: shake-horizontal 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
 }
 
+/* win */
+.win {
+  position: fixed;
+  display: none;
+}
+.win.show {
+  display: block;
+}
+
+.win iframe {
+  width: 80rem;
+  height: 80rem;
+}
+
 /* Individual card backgrounds */
 .open.e24 {
   background: #eee7de;

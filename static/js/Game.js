@@ -9,6 +9,7 @@ export default class Game {
     this.timeEl = document.querySelector('.time');
     this.pointsEl = document.querySelector('.points');
     this.resetEl = document.querySelector('.reset');
+    this.winEl = document.querySelector('.win');
 
     // Game audio
     this.cardSound = new Sound('../audio/card.wav');
@@ -19,9 +20,6 @@ export default class Game {
 
     // array of all cards
     this.cards = [...this.cardsEl];
-    // opened cards that are currently being played
-    this.activeCards = [];
-    this.matchedCards = [];
 
     // Add event listener to all cards
     this.cards.forEach((card) => {
@@ -48,9 +46,11 @@ export default class Game {
     this.timeSec = 0; // total time in seconds
     this.timer = 0; // setInterval reference
     this.isWinner = false;
+
     // empty card arrays
-    this.activeCards = [];
-    this.matchedCards = [];
+    this.activeCards = []; // cards currently under comparison
+    this.matchedCards = []; // matched cards so far
+
     // set HTML elements
     this.movesEl.innerText = '0';
     this.pointsEl.innerText = '0';
@@ -82,9 +82,9 @@ export default class Game {
   revealCard = (e) => {
     if (e.target.nodeName === 'LI') {
       const card = e.target;
-      card.classList.toggle('open');
-      card.classList.toggle('show');
-      card.classList.toggle('disabled');
+      card.classList.add('open');
+      card.classList.add('show');
+      card.classList.add('disabled');
     }
   };
 
@@ -153,18 +153,8 @@ export default class Game {
     this.activeCards[1].classList.add('unmatched');
     this.disableCards();
     setTimeout(() => {
-      this.activeCards[0].classList.remove(
-        'show',
-        'open',
-        'no-event',
-        'unmatched'
-      );
-      this.activeCards[1].classList.remove(
-        'show',
-        'open',
-        'no-event',
-        'unmatched'
-      );
+      this.activeCards[0].classList.remove('show', 'open', 'unmatched');
+      this.activeCards[1].classList.remove('show', 'open', 'unmatched');
       this.enableCards();
       this.activeCards = [];
     }, 1000);
@@ -180,6 +170,9 @@ export default class Game {
   enableCards = () => {
     this.cards.forEach((card) => {
       card.classList.remove('disabled');
+    });
+    this.matchedCards.forEach((card) => {
+      card.classList.add('disabled');
     });
   };
 
@@ -220,9 +213,13 @@ export default class Game {
   winGame = () => {
     this.endGame();
     console.log('You win!');
+    this.winEl.classList.add('show');
     setTimeout(() => {
       this.winSound.play();
-    }, 1000);
+    }, 750);
+    setTimeout(() => {
+      this.winEl.classList.remove('show');
+    }, 8500);
   };
 
   // win game dev
