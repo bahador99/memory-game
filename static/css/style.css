@@ -66,6 +66,17 @@ body {
   width: 80rem;
 }
 
+.timer {
+  display: flex;
+  align-items: center;
+}
+
+.reset {
+  width: 30px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
 /* deck & cards */
 .deck {
   width: 82rem;
@@ -207,5 +218,13 @@ body {
   }
   90% {
     transform: translateX(-4px);
+  }
+}
+
+/* Media queries */
+@media (max-width: 500px) {
+  .game-data {
+    flex-direction: column;
+    align-items: center;
   }
 }

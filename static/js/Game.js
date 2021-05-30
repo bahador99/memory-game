@@ -1,3 +1,5 @@
+import Sound from './Sound.js';
+
 export default class Game {
   constructor() {
     // HTML elements
@@ -6,6 +8,14 @@ export default class Game {
     this.movesEl = document.querySelector('.moves');
     this.timeEl = document.querySelector('.time');
     this.pointsEl = document.querySelector('.points');
+    this.resetEl = document.querySelector('.reset');
+
+    // Game audio
+    this.cardSound = new Sound('../audio/card.wav');
+    this.matchSound = new Sound('../audio/match.mp3');
+    this.unmatchSound = new Sound('../audio/unmatch.mp3');
+    this.winSound = new Sound('../audio/win.mp3');
+    this.resetSound = new Sound('../audio/reset.mp3');
 
     // array of all cards
     this.cards = [...this.cardsEl];
@@ -18,6 +28,8 @@ export default class Game {
       card.addEventListener('click', this.revealCard);
       card.addEventListener('click', this.playCard);
     });
+    // event listener for reset button
+    this.resetEl.addEventListener('click', this.resetGame);
 
     this.startGame();
   }
@@ -33,14 +45,22 @@ export default class Game {
     this.sec = 0;
     this.min = 0;
     this.hour = 0;
-    this.timeSec = 0; // time in seconds
-    this.timer = 0;
+    this.timeSec = 0; // total time in seconds
+    this.timer = 0; // setInterval reference
     this.isWinner = false;
+    // empty card arrays
+    this.activeCards = [];
+    this.matchedCards = [];
+    // set HTML elements
+    this.movesEl.innerText = '0';
+    this.pointsEl.innerText = '0';
+    this.timeEl.innerText = 'Click any two cards to start!';
 
     // shuffle cards and append to HTML element
     this.shuffleCards();
     this.deckEl.innerHTML = '';
     this.cards.forEach((card) => {
+      card.classList.remove('open', 'show', 'disabled', 'matched', 'unmatched');
       this.deckEl.appendChild(card);
     });
   };
@@ -55,6 +75,7 @@ export default class Game {
     this.endGame();
     // start new game
     this.startGame();
+    this.resetSound.play();
   };
 
   // Reveal card and make then unclickable
@@ -80,10 +101,14 @@ export default class Game {
           // cards matched
           this.matchCards();
           this.addPoints();
+          this.matchSound.play();
         } else {
           // cards didn't match
           this.unmatchCards();
+          this.unmatchSound.play();
         }
+      } else {
+        this.cardSound.play();
       }
     }
   };
@@ -101,7 +126,6 @@ export default class Game {
       this.timeEl.innerText = `${this.min} min ${this.sec} sec`;
       this.sec++;
       this.timeSec++;
-      console.log(this.sec);
       if (this.sec === 60) {
         this.sec = 0;
         this.min++;
@@ -118,11 +142,9 @@ export default class Game {
     this.activeCards[1].classList.add('matched');
     this.matchedCards.push(...this.activeCards);
     this.activeCards = [];
-    console.log(this.matchedCards.length);
     // check if game is won
     if (this.matchedCards.length === 16) {
-      this.endGame();
-      console.log('You win!');
+      this.winGame();
     }
   };
 
@@ -192,5 +214,23 @@ export default class Game {
 
     this.points += points;
     this.pointsEl.innerText = `${this.points}`;
+  };
+
+  // win game
+  winGame = () => {
+    this.endGame();
+    console.log('You win!');
+    setTimeout(() => {
+      this.winSound.play();
+    }, 1000);
+  };
+
+  // win game dev
+  win = () => {
+    this.matchedCards = this.cards;
+    this.cards.forEach((card) => {
+      card.classList.add('matched', 'open', 'show', 'disabled');
+    });
+    this.endGame();
   };
 }
