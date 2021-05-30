@@ -27,6 +27,10 @@ The HTML file `index.html` provides the deck of cards with images preloaded in i
 
 The JavsScript code provides two classes. The simple `Sound` class is in charge of creating `audio` elements for the different game events. The main `Game` class is includes the game logic.
 
+### CSS
+
+Currently the deck has a height and width based on the minimum of the screen hight and width, in order to avoid scroll bars and show all the game components in the screen.
+
 ## Further development
 
 There are many features and improvements the can be implemented to the current game. The following is a non-exhaustive list of potential features.
@@ -35,3 +39,10 @@ There are many features and improvements the can be implemented to the current g
 2. Multiplayer. This can be implemented in two ways.
    - The simple way would be having the multiplayer option through one device. The players would then take turns playing the game and every other move will count towards each player's points.
    - The more complex way would be to implement game sessions where two players could join the session through a unique link and then either take turns playing on the same deck or each play on their own deck while seeing the other players moves as well (both decks being the same and whoever finishes first, wins).
+3. Better mobile optimization. The layout can be better optimized for different screen sized. This will be more important when more elements will be added to the page, such as scoreboard or other popups.
+4. A better popup at the end of the game, which potentially shows game stats, scoreboard, a replay button and other option.
+5. A settings section for managing some game settings, such as play or stop music, deck or other element colors, single/multiplayer option, etc.
+6. Supporting keyboard. Arrow keys (or WASD) for navigating through the cards, space for revealing cards. And optionally more keys triggering other events.
+7. Adding music.
+8. Adding more animations.
+9. Coming up with a better equation for calculating points based on time and number of moves. Currently the game uses a linear equation for reducing added points as time passes and the number of moves increases.
