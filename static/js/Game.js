@@ -113,6 +113,7 @@ export default class Game {
     }
   };
 
+  // update move count
   makeMove = () => {
     this.moves++;
     this.movesEl.innerText = this.moves;
@@ -121,6 +122,7 @@ export default class Game {
     }
   };
 
+  // start game timer
   startTimer = () => {
     this.timer = setInterval(() => {
       this.timeEl.innerText = `${this.min} min ${this.sec} sec`;
@@ -137,6 +139,7 @@ export default class Game {
     }, 1000);
   };
 
+  // when two matching cards are revealed
   matchCards = () => {
     this.activeCards[0].classList.add('matched');
     this.activeCards[1].classList.add('matched');
@@ -148,6 +151,7 @@ export default class Game {
     }
   };
 
+  // when two unmacheing cards are revealed
   unmatchCards = () => {
     this.activeCards[0].classList.add('unmatched');
     this.activeCards[1].classList.add('unmatched');
@@ -160,13 +164,14 @@ export default class Game {
     }, 1000);
   };
 
-  // @description disable cards temporarily
+  // disable cards for click events
   disableCards = () => {
     this.cards.forEach((card) => {
       card.classList.add('disabled');
     });
   };
 
+  // enable unmatched cards for click events
   enableCards = () => {
     this.cards.forEach((card) => {
       card.classList.remove('disabled');
@@ -220,14 +225,5 @@ export default class Game {
     setTimeout(() => {
       this.winEl.classList.remove('show');
     }, 8500);
-  };
-
-  // win game dev
-  win = () => {
-    this.matchedCards = this.cards;
-    this.cards.forEach((card) => {
-      card.classList.add('matched', 'open', 'show', 'disabled');
-    });
-    this.endGame();
   };
 }
